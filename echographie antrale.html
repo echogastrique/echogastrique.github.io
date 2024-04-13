@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-primary is-bold">
+      <div class="hero-body">
+          <h1 class="title">Echographie gastrique</h1>
+          <h2 class="subtitle">
+            Donnée démographique et Identité
+          </h2>
+      </div>
+    </section>
+    <form id="form" class="container m-4 pl-4" method="POST">
+
+      <div class="field">
+        <label class="label">Date</label>
+        <div class="control">
+          <input
+            class="input"
+            type="date"
+            placeholder="Date"
+            name="date"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Nom & Prenom</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Nom & Prenom du patient"
+            name="nomprenom"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Sexe</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="Sexe" value="Homme" /> Homme
+          </label>
+          <label class="radio">
+            <input type="radio" name="Sexe" value="Femme" /> Femme
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Âge (en années)</label>
+        <div class="control">
+          <input type="text" class="input" name="age" placeholder="Entrez l'âge du patient">
+        </div>
+      </div>
+
+    
+      <div class="field">
+        <label class="label">Centre hospitalier</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Veuillez entrer le centre hospitalier"
+            name="centre_hospitalier"
+          />
+        </div>
+      </div> 
+
+      <div class="field">
+        <label class="label">Service</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Le service"
+            name="service"
+          />
+        </div>
+      </div> 
+      <div class="field">
+        <label class="label">IPP</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="IPP du patient "
+            name="ipp"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+        <label class="label">Poids (kg)</label>
+        <input type="text" class="input" name="poids" placeholder="Entrez le poids du patient">
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+        <label class="label">Taille (m)</label>
+        <input type="text" class="input" name="taille" placeholder="Entrez la taille du patient">
+        </div>
+      </div>
+      <div name="imc"></div>
+
+      <div class="field">
+        <div class="control">
+         <label class="label">IMC (kg/m²)<span style="color: red; font-size: 1.5em;">*</span></label>
+         <input type="text" class="input" name="imc" placeholder="Entrez résultats IMC" required title="Veuillez entrer l'IMC ">
+       </div>
+      </div>
+      
+      <script>
+        const form = document.getElementById('form');
+        const poids = document.querySelector('[name="poids"]');
+        const taille = document.querySelector('[name="taille"]');
+        const imc = document.querySelector('[name="imc"]');
+      
+        form.addEventListener('input', () => {
+          const poidsValue = parseFloat(poids.value);
+          const tailleValue = parseFloat(taille.value);
+      
+          if (!isNaN(poidsValue) &&!isNaN(tailleValue)) {
+            const imcValue = poidsValue / (tailleValue * tailleValue);
+            imc.textContent = `Votre IMC est de : ${imcValue.toFixed(2)}`;
+          } else {
+            imc.textContent = '';
+          }
+        });
+      </script>
+
+      <div class="field">
+        <label class="label">Comorbidités</label>
+        <div class="control">
+          <input type="text" class="input" name="comorbidite" placeholder="Entrez les antécédents du patient">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Type d'intervention</label>
+        <div class="control">
+          <input type="text" class="input" name="type_chirurgie" placeholder="Pour quelle chirurgie le patient est-il programmé">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Score ASA</label>
+        <div class="control">
+          <div class="select">
+            <select name="scoreASA">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Durée du jeune (en heures)</label>
+        <div class="control">
+          <input type="text" class="input" name="duree_jeune" placeholder="Entrez la durée du jeune en heures">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Type d'induction à la CPA / VPA </label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="inductionpre" value="ISR" /> ISR
+          </label>
+          <label class="radio">
+            <input type="radio" name="inductionpre" value="Classique" /> Classique
+          </label>
+        </div>
+      </div>
+    
+      <!--... -->
+      <section class="hero is-success is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <h2 class="subtitle">
+              Données de l'échographie
+            </h2>
+          </div>
+        </div>
+      </section>
+      <h3 style="text-align: center; font-weight: bold; color: red;font-size: 1.5em;">En décubitus latéral droit</h3>
+
+      <div class="field">
+        <label class="label">Diamétre AntéroPostérieur D1 (mm)</label>
+        <div class="control">
+          <input type="text" class="input" id="d1" placeholder="en mm">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Diamétre Longitudinal D2 (mm)</label>
+        <div class="control">
+          <input type="text" class="input" id="d2" placeholder="en mm">
+        </div>
+      </div>
+      
+      <p id="aireAntrale"></p>
+      
+      
+      <script>
+          function calculerAireAntrale() {
+            var d1 = document.getElementById("d1").value;
+            var d2 = document.getElementById("d2").value;
+            var aireAntrale = (d1 * d2 * Math.PI) / 4;
+            if ((aireAntrale/100) > 10) {
+              document.getElementById("aireAntrale").style.color = "red";
+            } else {
+              document.getElementById("aireAntrale").style.color = "black";
+            }
+            document.getElementById("aireAntrale").innerHTML = "Aire antrale: " + (aireAntrale/100).toFixed(2) + " cm²";
+          }
+          function calculerVolumeAntrale() {
+            var d1 = document.getElementById("d1").value;
+            var d2 = document.getElementById("d2").value;
+            var aireAntrale = (d1 * d2 * Math.PI) / 400;
+            var age = document.querySelector('[name="age"]').value;
+            var poids = document.querySelector('[name="poids"]').value;
+            var volumeAntrale = (27 + (14.6 * (aireAntrale)) - (1.28 * age)) / poids;
+            if (volumeAntrale > 1.5 || (aireAntrale/100) > 10) {
+              document.getElementById("volumeAntrale").style.color = "red";
+              document.getElementById("aireAntrale").style.color = "red";
+              document.getElementById("message").style.display = "block";
+              document.getElementById("message").innerHTML = "Risque majoré d'inhalation bronchique. <br> Précautions à prendre.<br> Procéder à intubation séquence rapide avec précautions.";
+              document.getElementById("message").style.color = "red";
+              
+            } else {
+              document.getElementById("volumeAntrale").style.color = "black";
+              document.getElementById("aireAntrale").style.color = "black";
+              document.getElementById("message").style.display = "block";
+              document.getElementById("message").innerHTML = "Risque faible d'inhalation bronchique.";
+              document.getElementById("message").style.color = "green";
+            }
+            document.getElementById("volumeAntrale").innerHTML = "Volume antrale: " + volumeAntrale.toFixed(2) + " ml/kg";
+            calculerAireAntrale();
+          }
+          // Calcul de l'aire antrale en temps réel
+          document.getElementById("d1").oninput = calculerAireAntrale;
+          document.getElementById("d2").oninput = calculerAireAntrale;
+          
+        </script>
+        <p id="volumeAntrale"></p>
+        <button type="button" onclick="calculerVolumeAntrale()">Calculer le volume</button>
+        
+        <div class="field">
+          <div class="control">
+           <label class="label">Aire Antrale en cm²<span style="color: red; font-size: 1.5em;">*</span></label>
+           <input type="text" class="input" name="aireAntrale" placeholder="Entrez résultats Aire Antrale" required title="Veuillez entrer Le résultat ">
+         </div>
+        </div>
+            
+        <div class="field">
+          <div class="control">
+           <label class="label">Volume antrale en ml<span style="color: red; font-size: 1.5em;">*</span></label>
+           <input type="text" class="input" name="volumeAntrale" placeholder="Entrez résultats Volume Antrale" required title="Veuillez entrer Le résultat ">
+         </div>
+        </div>
+        <div class="field">
+          <label class="label">Durée de l'examen (en minutes)</label>
+          <div class="control">
+            <input type="text" class="input" name="duree_examen" placeholder="Entrez la durée de l'examen en minutes">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Type d'induction après données de l'échographie</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="inductionpost" value="ISR" /> ISR
+            </label>
+            <label class="radio">
+              <input type="radio" name="inductionpost" value="Classique" /> Classique
+            </label>
+          </div>
+        </div>
+    
+
+        <div class="field">
+          <label class="label">Grade Perlas</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="grade_perlas" value="0" /> 0
+            </label>
+            <label class="radio">
+              <input type="radio" name="grade_perlas" value="1" /> 1
+            </label>
+            <label class="radio">
+              <input type="radio" name="grade_perlas" value="2" /> 2
+            </label>
+          </div>
+        </div>
+
+        <script>
+          // Get the grade_perlas radio buttons
+          const gradePerlasRadios = document.querySelectorAll('[name="grade_perlas"]');
+        
+          // Add an event listener to each radio button
+          gradePerlasRadios.forEach((radio) => {
+            radio.addEventListener('change', () => {
+              // Get the selected value
+              const selectedValue = radio.value;
+        
+              // Get the volumeAntrale and aireAntrale input fields
+              const volumeAntraleInput = document.querySelector('[name="volumeAntrale"]');
+              const aireAntraleInput = document.querySelector('[name="aireAntrale"]');
+        
+              // Update the required attribute based on the selected value
+              if (selectedValue === '0' || selectedValue === '1') {
+                volumeAntraleInput.required = false;
+                aireAntraleInput.required = false;
+              } else {
+                volumeAntraleInput.required = true;
+                aireAntraleInput.required = true;
+              }
+            });
+          });
+        </script>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit" id="submit-button">
+            Sumbit
+          </button>
+        </div>
+        <div class="control">
+          <button class="button is-danger">Cancel</button>
+        </div>
+      </div>
+    </form>
+    <div
+      id="message"
+      style="
+        display: none;
+        margin: 20px;
+        font-weight: bold;
+        color: green;
+        padding: 8px;
+        background-color: beige;
+        border-radius: 4px;
+        border-color: aquamarine;
+      "
+    ></div>
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        document.getElementById("message").textContent = "Submitting..";
+        document.getElementById("message").style.display = "block";
+        document.getElementById("submit-button").disabled = true;
+
+        // Collect the form data
+        var formData = new FormData(this);
+        var keyValuePairs = [];
+        for (var pair of formData.entries()) {
+          keyValuePairs.push(pair[0] + "=" + pair[1]);
+        }
+
+        var formDataString = keyValuePairs.join("&");
+
+        // Send a POST request to your Google Apps Script
+        fetch(
+          "https://script.google.com/macros/s/AKfycby1p78cqAP2KwVOIJRdByzFCUM9zfSAhMgE2Mwmx1n47fSvvh3nBVlGL0qiyyT7ur5Mpg/exec",
+          {
+            redirect: "follow",
+            method: "POST",
+            body: formDataString,
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+          }
+        )
+          .then(function (response) {
+            // Check if the request was successful
+            if (response) {
+              return response; // Assuming your script returns JSON response
+            } else {
+              throw new Error("Failed to submit the form.");
+            }
+          })
+          .then(function (data) {
+            // Display a success message
+            document.getElementById("message").textContent =
+              "Data submitted successfully!";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("message").style.backgroundColor = "green";
+            document.getElementById("message").style.color = "beige";
+            document.getElementById("submit-button").disabled = false;
+            document.getElementById("form").reset();
+
+            setTimeout(function () {
+              document.getElementById("message").textContent = "";
+              document.getElementById("message").style.display = "none";
+            }, 2600);
+          })
+          .catch(function (error) {
+            // Handle errors, you can display an error message here
+            console.error(error);
+            document.getElementById("message").textContent =
+              "An error occurred while submitting the form.";
+            document.getElementById("message").style.display = "block";
+          });
+      });
+    </script>
+  </body>
+</html>
